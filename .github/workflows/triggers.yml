@@ -11,6 +11,25 @@ on:
     types: [opened, closed, reopened]
   issue_comment:
     types: [created, edited, deleted]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
   schedule:
     - cron: '50 * * * *'
 
@@ -59,6 +78,14 @@ jobs:
         run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - name: Show branch and repository
         run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Workflow_Dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Log level: $LEVEL"
+          echo "Tags: $TAGS"
+          echo "Environment: $ENVIRONMENT"
+
   Triggers_Schedule:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
