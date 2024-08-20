@@ -31,7 +31,7 @@ on:
         type: environment
         required: true
   schedule:
-    - cron: '50 * * * *'
+    - cron: '0 * * * *'
 
 jobs:
   Triggers_Push:
