@@ -1,0 +1,70 @@
+name: Triggers
+run-name: Triggers
+on:
+  push:
+    branches:
+      - aprendiendo-github-actions
+  pull_request:
+    branches:
+      - aprendiendo-github-actions
+  issues:
+    types: [opened, closed, reopened]
+  issue_comment:
+    types: [created, edited, deleted]
+  schedule:
+    - cron: '50 * * * *'
+
+jobs:
+  Triggers_Push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Pull_Request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Issue_Comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Schedule:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Show execution time
+        run: echo "⏰ The time is now ${{ github.event.schedule }}."
