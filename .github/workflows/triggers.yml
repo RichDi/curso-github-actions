@@ -81,7 +81,9 @@ jobs:
   Triggers_Workflow_Dispatch:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - uses: actions/checkout@v4
+      - name: Dispatch event
+        run: |
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
           echo "Environment: $ENVIRONMENT"
