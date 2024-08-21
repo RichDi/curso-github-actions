@@ -1,0 +1,106 @@
+name: Triggers
+run-name: Triggers
+on:
+  push:
+    branches:
+      - aprendiendo-github-actions
+  pull_request:
+    branches:
+      - aprendiendo-github-actions
+  issues:
+    types: [opened, closed, reopened]
+  issue_comment:
+    types: [created, edited, deleted]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  Triggers_Push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Pull_Request:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Issues:
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Issue_Comment:
+    if: github.event_name == 'issue_comment'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  Triggers_Workflow_Dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dispatch event
+        run: |
+          echo "Log level: $LEVEL"
+          echo "Tags: $TAGS"
+          echo "Environment: $ENVIRONMENT"
+        env:
+          LEVEL: ${{ inputs.logLevel }}
+          TAGS: ${{ inputs.tags }}
+          ENVIRONMENT: ${{ inputs.environment }}
+  Triggers_Schedule:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Triggered by
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Show OS and branch
+        run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - name: Show branch and repository
+        run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Show execution time
+        run: echo "⏰ The time is now ${{ github.event.schedule }}."
