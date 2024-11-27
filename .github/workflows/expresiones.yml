@@ -1,0 +1,43 @@
+name: Expresiones
+run-name: Aprendiendo Expresiones
+on:
+  push:
+    branches:
+      - aprendiendo-github-actions
+  workflow_dispatch:
+    inputs:
+      edad:
+        description: 'Edad'
+        required: true
+        type: number
+      nombre:
+        description: 'Nombre'
+        required: true
+        default: 'Richi'
+        type: string
+
+jobs:
+  Step_1:
+    if: inputs.edad >= 18
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: echo "${{ inputs.nombre }} es mayor de edad."
+  Step_2:
+    if: inputs.edad < 18
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: echo "${{ inputs.nombre }} es menor de edad."
+  Step_3:
+    if: inputs.edad == 18
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: echo "${{ inputs.nombre }} tiene 18 años."
+
+
+      
+  
+
+      
