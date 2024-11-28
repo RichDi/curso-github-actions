@@ -1,0 +1,19 @@
+name: Variables
+run-name: Probando variables
+on: 
+  push:
+    branches:
+      - aprendiendo-github-actions
+env:
+  MY_VAR: "Hello, world!"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print local variable
+        run: echo $MY_VAR
+      - name: Print repository variable
+        run: echo ${{ env.MY_VAR }}
+      - name: Print repository variable
+        run: echo ${{ env.TEST }}
+    
